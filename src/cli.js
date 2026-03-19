@@ -32,12 +32,12 @@ async function main() {
         process.exit(0);
     }
 
-    // Загружаем карту
+    // Load map
     const mapPath = path.resolve(argv.map);
     /** @type {Object.<string, string>} */
     const renameMap = JSON.parse(await fs.readFile(mapPath, 'utf8'));
 
-    // Собираем файлы (используем fileCollector из экстрактора)
+    // Collect files
     const exclude = Array.isArray(argv.exclude) ? argv.exclude : [argv.exclude];
     const files = await collectFiles(argv._, argv.recursive, exclude);
     if (files.length === 0) {

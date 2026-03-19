@@ -48,12 +48,12 @@ export function renameIdentifiers(code, renameMap) {
         enter(path) {
             const node = path.node;
 
-            // Проверяем любой узел, у которого есть поле name
+            // Check any node that has a name field
             if (node.name !== undefined) {
                 const name = node.name;
                 const withHash = name.startsWith('#') ? name : '#' + name;
 
-                // Сначала ищем точное совпадение (для обычных идентификаторов)
+                // First look for exact match (for regular identifiers)
                 if (effectiveMap.hasOwnProperty(name)) {
                     const newName = effectiveMap[name];
                     console.log(
@@ -62,23 +62,23 @@ export function renameIdentifiers(code, renameMap) {
                     node.name = newName;
                     renameCount++;
                 }
-                // Затем ищем с # (для приватных полей, где в карте ключ с #)
+                // Then look for match with # (for private fields where the map key includes #)
                 else if (effectiveMap.hasOwnProperty(withHash)) {
                     const newNameWithHash = effectiveMap[withHash];
                     console.log(
                         `🔄 Renaming private "${withHash}" -> "${newNameWithHash}" (${node.type}) at line ${node.loc?.start.line}`
                     );
 
-                    // Определяем, нужно ли оставить # в имени узла
+                    // Determine whether to keep the # in the node name
                     if (node.type === 'Identifier' && name.startsWith('#')) {
-                        // Старая версия Babel: имя уже содержит #
+                        // Older Babel version: name already includes #
                         if (newNameWithHash.startsWith('#')) {
                             node.name = newNameWithHash;
                         } else {
-                            node.name = '#' + newNameWithHash; // добавляем # обратно
+                            node.name = '#' + newNameWithHash; // add # back
                         }
                     } else {
-                        // Современный Babel: имя без #
+                        // Modern Babel: name without #
                         if (newNameWithHash.startsWith('#')) {
                             node.name = newNameWithHash.slice(1);
                         } else {
