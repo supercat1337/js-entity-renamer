@@ -1,0 +1,29 @@
+{
+    "name": "js-entity-renamer",
+    "version": "1.0.0",
+    "description": "Rename JavaScript entities using a mapping file",
+    "type": "module",
+    "bin": {
+        "js-entity-renamer": "src/cli.js"
+    },
+    "scripts": {
+        "start": "node src/cli.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/supercat1337/js-entity-renamer.git"
+    },
+    "dependencies": {
+        "@babel/parser": "^7.26.0",
+        "@babel/traverse": "^7.26.0",
+        "@babel/generator": "^7.26.0",
+        "@babel/types": "^7.26.0",
+        "fast-glob": "^3.3.3",
+        "minimist": "^1.2.8"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "author": "Albert Bazaleev",
+    "license": "MIT"
+}

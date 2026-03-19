@@ -1,0 +1,11 @@
+node_modules
+creds
+credentials.json
+coverage
+package-lock.json
+.vscode
+output
+downloads
+projects
+licenses.json
+LICENSES.md
